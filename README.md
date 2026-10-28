@@ -6,6 +6,8 @@
 
 *Source code is kept in a private repository. A live walkthrough and full source are available to clients on request.*
 
+![Lead alerts arriving in Gmail, each with an AI score and urgency](screenshots/02-lead-alerts-inbox.jpg)
+
 ---
 
 ## The problem
@@ -63,6 +65,30 @@ Seven realistic sample leads, run end-to-end through the live workflow with Gemi
 | Tom — broken email & phone | 🟡 Needs Review tab | — | Stopped by validation before reaching the AI |
 
 Every lead ended up in exactly the right place: two hot leads alerted, one flagged for a human, spam and out-of-area requests filed quietly, the duplicate merged, and the broken lead caught.
+
+## See it working
+
+Stills from the recorded demo run.
+
+**The workflow in n8n.** One flow handles every lead, from intake to alert.
+
+![n8n workflow canvas](screenshots/01-workflow.jpg)
+
+**The alert the team receives.** Lead details, owner, the AI's reasoning, and the next step.
+
+![Qualified lead alert email](screenshots/03-lead-alert-email.jpg)
+
+**The Google Sheets CRM.** Every lead scored, assigned and given a follow-up date, with an AI reply draft waiting for approval.
+
+![Leads sheet with scores, owners and status](screenshots/04-google-sheet-crm.jpg)
+
+**Quote follow-up, drafted automatically.** Quotes with no reply after 3 days get a ready-to-send Gmail draft. A person still clicks Send.
+
+![Gmail follow-up draft](screenshots/05-quote-followup-draft.jpg)
+
+**Nothing fails silently.** Any error is logged and emailed with a link to the failed run.
+
+![Automation failed alert email](screenshots/06-failure-alert-email.jpg)
 
 ## Engineering highlights
 
