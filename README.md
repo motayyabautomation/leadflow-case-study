@@ -37,6 +37,33 @@ flowchart LR
 | **2. Error handler** | Any failure in the other workflows is logged and emailed, so nothing fails silently |
 | **3. Daily follow-ups** | Weekday 08:00 digest of follow-ups due, per owner; quotes unanswered for 3+ days get a personalised Gmail draft |
 
+## How a lead moves through it
+
+1. **Arrives** from the website form, a lead-site email in Gmail, or the built-in test mode.
+2. **Cleaned and checked.** Emails are lowercased, phones converted to international format; a lead with no usable contact goes to *Needs Review*.
+3. **Duplicate check.** A returning customer updates their existing row (repeat count + note) instead of creating a new one.
+4. **Assigned** to a team member in turn (round-robin).
+5. **Judged by AI.** Gemini returns a category, a 0–100 score, urgency, a reason, missing info and a reply draft.
+6. **Checked again.** If the AI fails or contradicts itself, the lead goes to *Needs review*. It is never lost or silently discarded.
+7. **Saved and alerted.** One row per lead in the CRM; the team gets an email for every lead worth their time.
+8. **A human replies.** The draft sits in the sheet to be reviewed and sent. Nothing reaches a customer automatically.
+
+## Results from a real test run
+
+Seven realistic sample leads, run end-to-end through the live workflow with Gemini:
+
+| Lead | Result | Score | Why |
+|---|---|---|---|
+| Jennifer Walsh — kitchen remodel | ✅ Qualified | 95 | Clear job inside the service area |
+| Marcus Lee — drywall repair (Angi) | ✅ Qualified | 90 | Clear, urgent job |
+| Sarah Kim — vague enquiry | 🟡 Needs review | 30 | Vague message, no location |
+| Robert Diaz — deck repair | ⚪ Not a fit | — | Outside the service area |
+| Growth Agency — SEO pitch | ⚪ Not a fit | — | Spam sales pitch |
+| Jen Walsh — second message | 🔁 Merged | — | Same person as Jennifer: saved once, repeat noted |
+| Tom — broken email & phone | 🟡 Needs Review tab | — | Stopped by validation before reaching the AI |
+
+Every lead ended up in exactly the right place: two hot leads alerted, one flagged for a human, spam and out-of-area requests filed quietly, the duplicate merged, and the broken lead caught.
+
 ## Engineering highlights
 
 - **The AI never decides alone.** Output must match a JSON schema; API errors, invalid JSON or contradictory answers (e.g. "Qualified" with a score of 20) fall back to *Needs review* so a real customer is never silently discarded.
@@ -62,4 +89,6 @@ Any business that receives enquiries: home services, clinics, law firms, real-es
 
 ---
 
-**Need something like this for your business?** → [Contact me via my GitHub profile](https://github.com/motayyabautomation)
+> **No lead is lost, every lead is answered fast, and nothing is sent without your approval.**
+
+**Need something like this for your business?** → [Hire me on Freelancer](https://www.freelancer.pk/u/tayyabm03)
